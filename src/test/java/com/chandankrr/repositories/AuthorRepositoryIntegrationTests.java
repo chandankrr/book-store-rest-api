@@ -2,6 +2,7 @@ package com.chandankrr.repositories;
 
 import com.chandankrr.TestDataUtil;
 import com.chandankrr.domain.Author;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,14 @@ public class AuthorRepositoryIntegrationTests {
         Optional<Author> result = underTest.findById(authorA.getId());
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(authorA);
+    }
+
+    @Test
+    public void testThatAuthorCanBeDeleted() {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        underTest.save(authorA);
+        underTest.deleteById(authorA.getId());
+        Optional<Author> result = underTest.findById(authorA.getId());
+        assertThat(result).isEmpty();
     }
 }
