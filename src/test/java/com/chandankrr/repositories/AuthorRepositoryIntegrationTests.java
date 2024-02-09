@@ -47,4 +47,15 @@ public class AuthorRepositoryIntegrationTests {
         assertThat(result).hasSize(3).containsExactly(authorA,
                 authorB, authorC);
     }
+
+    @Test
+    public void testThatAuthorCanBeUpdated() {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        underTest.save(authorA);
+        authorA.setName("UPDATED");
+        underTest.save(authorA);
+        Optional<Author> result = underTest.findById(authorA.getId());
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(authorA);
+    }
 }
