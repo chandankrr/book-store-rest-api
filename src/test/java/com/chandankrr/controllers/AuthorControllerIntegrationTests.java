@@ -91,7 +91,7 @@ public class AuthorControllerIntegrationTests {
     }
 
     @Test
-    public void testThatGetAuthorReturnsHttpStatus200WhenAuthorExist() throws Exception {
+    public void testThatGetAuthorReturnsHttpStatus200WhenAuthorExists() throws Exception {
         AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
         authorService.createAuthor(testAuthorEntityA);
 
@@ -102,7 +102,7 @@ public class AuthorControllerIntegrationTests {
     }
 
     @Test
-    public void testThatGetAuthorReturnsAuthorWhenAuthorExist() throws Exception {
+    public void testThatGetAuthorReturnsAuthorWhenAuthorExists() throws Exception {
         AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
         authorService.createAuthor(testAuthorEntityA);
 
@@ -119,7 +119,7 @@ public class AuthorControllerIntegrationTests {
     }
 
     @Test
-    public void testThatGetAuthorReturnsHttpStatus404WhenNoAuthorExist() throws Exception {
+    public void testThatGetAuthorReturnsHttpStatus404WhenNoAuthorExists() throws Exception {
         AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
         authorService.createAuthor(testAuthorEntityA);
 
