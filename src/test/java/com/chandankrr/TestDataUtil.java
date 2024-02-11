@@ -1,5 +1,7 @@
 package com.chandankrr;
 
+import com.chandankrr.domain.dtos.AuthorDto;
+import com.chandankrr.domain.dtos.BookDto;
 import com.chandankrr.domain.entities.AuthorEntity;
 import com.chandankrr.domain.entities.BookEntity;
 
@@ -33,7 +35,7 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static BookEntity createTestBookA(AuthorEntity author) {
+    public static BookEntity createTestBookEntityA(final AuthorEntity author) {
         return BookEntity.builder()
                 .isbn("978-1-2345-6789-0")
                 .title("The Shadow of the Attic")
@@ -41,7 +43,15 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static BookEntity createTestBookB(AuthorEntity author) {
+    public static BookDto createTestBookDtoA(final AuthorDto author) {
+        return BookDto.builder()
+                .isbn("978-1-2345-6789-0")
+                .title("The Shadow of the Attic")
+                .author(author)
+                .build();
+    }
+
+    public static BookEntity createTestBookB(final AuthorEntity author) {
         return BookEntity.builder()
                 .isbn("978-1-2345-6789-1")
                 .title("Beyond the Horizon")
@@ -49,7 +59,7 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static BookEntity createTestBookC(AuthorEntity author) {
+    public static BookEntity createTestBookC(final AuthorEntity author) {
         return BookEntity.builder()
                 .isbn("978-1-2345-6789-2")
                 .title("The Last Ember")
