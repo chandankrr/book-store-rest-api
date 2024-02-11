@@ -83,10 +83,49 @@ public class AuthorControllerIntegrationTests {
         authorService.createAuthor(testAuthorEntityA);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/authors")
-                        .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.jsonPath("$[0].id").isNumber())
+                        MockMvcRequestBuilders.get("/authors")
+                                .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(MockMvcResultMatchers.jsonPath("$[0].id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Abigail Rose"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].age").value(80));
+    }
+
+    @Test
+    public void testThatGetAuthorReturnsHttpStatus200WhenAuthorExist() throws Exception {
+        AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
+        authorService.createAuthor(testAuthorEntityA);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/authors/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void testThatGetAuthorReturnsAuthorWhenAuthorExist() throws Exception {
+        AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
+        authorService.createAuthor(testAuthorEntityA);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/authors/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.id").value(1)
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.name").value("Abigail Rose")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.age").value(80)
+        );
+    }
+
+    @Test
+    public void testThatGetAuthorReturnsHttpStatus404WhenNoAuthorExist() throws Exception {
+        AuthorEntity testAuthorEntityA = TestDataUtil.createTestAuthorA();
+        authorService.createAuthor(testAuthorEntityA);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/authors/99")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }
